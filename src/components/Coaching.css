@@ -1,0 +1,30 @@
+.coaching {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.coaching h1 {
+    color: #2a2a72;
+    font-size: 28px;
+}
+
+.coaching h2 {
+    color: #1a1a1a;
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+.coaching h3 {
+    color: #333;
+    font-size: 20px;
+    margin-top: 18px;
+}
+
+.coaching p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}

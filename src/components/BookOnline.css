@@ -1,0 +1,24 @@
+.book-online {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    text-align: center; /* Centered text can add a formal touch to about pages */
+}
+
+.book-online h1 {
+    color: #333;
+    font-size: 28px;
+}
+
+.book-online h2 {
+    color: #555;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
