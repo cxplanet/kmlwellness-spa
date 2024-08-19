@@ -21,7 +21,7 @@ function Coaching() {
             <p>As a Functional Medicine Health Coach, I specialize in supporting women through this significant life transition. I’ll meet you where you are, help you identify your unique strengths and guide you in making sustainable lifestyle changes that align with your personal vision of optimal health during this stage of life.</p>
             <p>My training at the Functional Medicine Coaching Academy equips me with a systems-based approach, grounded in scientific evidence, to address the unique challenges of perimenopause and menopause. Together, we will leverage your strengths to cultivate a growth mindset, leading to symptom relief and inspiring personal transformation. I am here to empower you to become your own health advocate, helping you understand the potential root causes of your symptoms and guiding you toward a more balanced, vibrant, and joyful life.</p>
         <div className="services">
-        <h2>Classes</h2>
+        <h2>Packages</h2>
         <div className="class-list">
             {classes.map((cls, index) => (
                 <div key={index} className="class-box">
