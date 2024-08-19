@@ -1,5 +1,6 @@
 import React from 'react';
 import './Services.css'; // Import your CSS file
+import './Yoga.css';
 
 function Services() {
     const classes = [
@@ -38,6 +39,30 @@ function Services() {
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className='coaching'>
+                <h1>Health Coaching</h1>
+                <p>Six sessions:</p>
+                <p>•	One 1-hour initial session covering current situation, goal-setting & planning</p>
+                <p>•	Five 45-minute bi-weekly follow-up sessions</p>
+                <p>•	Unlimited email or text support</p>
+                <p>Sessions conducted in-person, via Zoom, FaceTime or telephone per client’s preference.</p>
+                <p>$425.00</p>
+                <p>Additional sessions available upon completion of package at $85.00 per 45-minute session</p>
+                <p>Payment options include credit card via Square, check or cash</p>
+                <h1>Yoga for Menopause</h1>
+                <p>Explore restorative and supportive poses to improve common symptoms of menopause such as hot flashes, insomnia, mood swings, brain fog and more.</p>
+                <p>Class meets weekly.</p>
+                <p>$20.00 per class. Class passes available.</p>
+                <h1>Yoga for Osteoporosis</h1>
+                <p>Learn and practice the twelve poses found to be most beneficial for bone health. Improve posture, balance, coordination, strength and mobility to help prevent the likelihood of falls.</p> 
+                <p>4-week series. Appropriate for all ages and abilities.</p>
+                <p>Cost: $75.00</p>
+                <h1>Strong Core. Strong You.</h1>
+                <p>The core is the basis of all movement and every asana. Learn the basics of core engagement to start to build a strong core.</p>
+                <p>4-week series. Appropriate for all ages and abilities.</p>
+                <p>Cost $75.00</p>
+                <h1>All classes located at TajMotion, 9250 14th Ave NW, Seattle, WA 98117. TajMotion is a secure building. Entry code sent upon registration.</h1>
             </div>
         </div>
     );
