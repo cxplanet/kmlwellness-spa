@@ -10,8 +10,8 @@ function Navbar() {
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/coaching">Health Coaching</Link></li>
                 {/* <li><Link to="/book-online">Book Online</Link></li> */}
-                <li><Link to="/services">Services</Link></li>
                 <li><Link to="/yoga">Yoga</Link></li>
+                <li><Link to="/services">Services</Link></li>
             </ul>
         </nav>
     );
