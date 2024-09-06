@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Services.css'; // Import your CSS file
 import './Yoga.css';
 
@@ -26,6 +26,8 @@ function Services() {
         }
     ];
 
+    const [showInfo, setShowInfo] = useState("Show Info");
+
     return (
         <div className="services">
             <h1>Our Services</h1>
@@ -42,14 +44,19 @@ function Services() {
             </div>
             <div className='coaching'>
                 <h1>Health Coaching</h1>
-                <p>Six sessions:</p>
-                <p>•	One 1-hour initial session covering current situation, goal-setting & planning</p>
-                <p>•	Five 45-minute bi-weekly follow-up sessions</p>
-                <p>•	Unlimited email or text support</p>
+                <h3>Six sessions:</h3>
+                <ul>
+                <li>One 1-hour initial session covering current situation, goal-setting & planning</li>
+                <li>Five 45-minute bi-weekly follow-up sessions</li>
+                <li>Unlimited email or text support</li>
+                </ul>
                 <p>Sessions conducted in-person, via Zoom, FaceTime or telephone per client’s preference.</p>
-                <p>$425.00</p>
-                <p>Additional sessions available upon completion of package at $85.00 per 45-minute session</p>
-                <p>Payment options include credit card via Square, check or cash</p>
+                <h3>Pricing:</h3>
+                <ul>
+                <li>$425.00</li>
+                <li>Additional sessions available upon completion of package at $85.00 per 45-minute session</li>
+                <li>Payment options include credit card via Square, check or cash</li>
+                </ul>
                 <h1>Yoga for Menopause</h1>
                 <p>Explore restorative and supportive poses to improve common symptoms of menopause such as hot flashes, insomnia, mood swings, brain fog and more.</p>
                 <p>Class meets weekly.</p>

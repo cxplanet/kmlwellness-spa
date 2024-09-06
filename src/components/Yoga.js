@@ -1,25 +1,40 @@
 import React from 'react';
 import './Yoga.css';
 import './Services.css';
+import { useState } from 'react';
+import { Dialog } from '@mui/material';
+import MenoInfo from './MenoInfo';
+import OsteoInfo from './OsteoInfo';
+import StrengthInfo from './StrengthInfo';
 
 function Yoga() {
     const classes = [
         {
             title: 'Yoga for Menopause',
             image: 'https://static.wixstatic.com/media/11062b_fe29cf52c2e44b24879be7e0282b98ea~mv2.jpg/v1/fill/w_406,h_272,fp_0.50_0.50,lg_1,q_80,enc_auto/11062b_fe29cf52c2e44b24879be7e0282b98ea~mv2.jpg', // Replace with your actual image path or URL
-            description: 'Tailored yoga sessions designed to alleviate symptoms of menopause and promote overall well-being.'
+            description: 'Tailored yoga sessions designed to alleviate symptoms of menopause and promote overall well-being.',
+            moreInfo: 'Meno'
         },
         {
             title: 'Yoga for Osteoporosis',
             image: 'https://static.wixstatic.com/media/7214ea_8c1fa92c078746ef8f32fa4e2e5479e1~mv2.jpg/v1/fill/w_580,h_388,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/7214ea_8c1fa92c078746ef8f32fa4e2e5479e1~mv2.jpg', // Replace with your actual image path or URL
-            description: 'Safe and effective yoga practices aimed at improving bone health and reducing the risk of osteoporosis.'
+            description: 'Safe and effective yoga practices aimed at improving bone health and reducing the risk of osteoporosis.',
+            moreInfo: 'Osteo'
         },
         {
             title: 'Strong Core, Strong You',
             image: 'https://static.wixstatic.com/media/11062b_fe29cf52c2e44b24879be7e0282b98ea~mv2.jpg/v1/fill/w_406,h_272,fp_0.50_0.50,lg_1,q_80,enc_auto/11062b_fe29cf52c2e44b24879be7e0282b98ea~mv2.jpg', // Replace with your actual image path or URL
-            description: 'Strengthen your core with focused exercises that enhance stability, posture, and overall strength.'
+            description: 'Strengthen your core with focused exercises that enhance stability, posture, and overall strength.',
+            moreInfo: 'Strength'
         }
     ];
+
+    const [showInfo, setShowInfo] = useState(false);
+
+    const showInfoPage = () => [
+        setShowInfo(!showInfo)
+    ];
+
     return (
         <div className="yoga">
         <div>
@@ -37,6 +52,22 @@ function Yoga() {
                     <div className="class-description">
                         <h2>{cls.title}</h2>
                         <p>{cls.description}</p>
+                        {showInfo &&  <div>Show Page</div>}
+
+                        <div onClick = {showInfoPage} className="desc-button">More Info</div>
+                        <Dialog open={showInfo}>
+                            {/* <p>{cls.moreInfo.listTitle}</p>
+                            <ul>
+                                {cls.moreInfo.list.map((item, index) =>
+                            <li>{item}</li>
+                            )}
+                            </ul>
+                            <p>Price: {cls.moreInfo.price}</p> */}
+                            <MenoInfo/>
+                            <div onClick = {showInfoPage} className="dismiss-button">Close
+                            </div>
+
+                        </Dialog>
                     </div>
                 </div>
             ))}

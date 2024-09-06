@@ -1,15 +1,31 @@
 import React from 'react';
 import './Coaching.css';
 import './Services.css';
+import { useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import CoachingInfo from './CoachingInfo';
 
 function Coaching() {
     const classes = [
         {
             title: 'Health Coaching',
             image: 'https://static.wixstatic.com/media/7214ea_f8e7d95d5beb41e4bdbdcfec29ee0acf~mv2.jpg/v1/fill/w_580,h_388,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/7214ea_f8e7d95d5beb41e4bdbdcfec29ee0acf~mv2.jpg', // Replace with your actual image path or URL
-            description: 'Personalized coaching to help you achieve optimal health and wellness through sustainable lifestyle changes.'
+            description: 'Personalized coaching to help you achieve optimal health and wellness through sustainable lifestyle changes.',
+            moreInfo: {
+                title: 'Health Coaching',
+                listTitle: 'Six Sessions',
+                list: ['One 1-hour initial session covering current situation, goal-setting & planning','Five 45-minute bi-weekly follow-up sessions','Unlimited email or text support'],
+                price: '$425',
+                moreInfo: 'coaching'
+            }
         }
     ];
+const [showInfo, setShowInfo] = useState(false);
+
+const showInfoPage = () => [
+    setShowInfo(!showInfo)
+];
     return (
         <div>
         <div className="coaching">
@@ -29,6 +45,22 @@ function Coaching() {
                     <div className="class-description">
                         <h2>{cls.title}</h2>
                         <p>{cls.description}</p>
+                        {showInfo &&  <div>Show Page</div>}
+
+                        <div onClick = {showInfoPage} className="desc-button">More Info</div>
+                        <Dialog open={showInfo}>
+                            {/* <p>{cls.moreInfo.listTitle}</p>
+                            <ul>
+                                {cls.moreInfo.list.map((item, index) =>
+                            <li>{item}</li>
+                            )}
+                            </ul>
+                            <p>Price: {cls.moreInfo.price}</p> */}
+                            <CoachingInfo/>
+                            <div onClick = {showInfoPage} className="dismiss-button">Close
+                            </div>
+
+                        </Dialog>
                     </div>
                 </div>
             ))}
@@ -38,5 +70,6 @@ function Coaching() {
     </div>
     );
 }
+
 
 export default Coaching;
