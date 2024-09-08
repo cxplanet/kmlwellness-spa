@@ -29,11 +29,30 @@ function Yoga() {
         }
     ];
 
-    const [showInfo, setShowInfo] = useState(false);
+    
+    const [openDialog, setOpenDialog] = useState(null);
 
-    const showInfoPage = () => [
-        setShowInfo(!showInfo)
-    ];
+    const showInfoPage = (infoType) => {
+        setOpenDialog(infoType);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(null);
+    };
+    
+
+    const renderDialogContent = (infoType) => {
+        switch (infoType) {
+            case 'Meno':
+                return <MenoInfo />;
+            case 'Osteo':
+                return <OsteoInfo />;
+            case 'Strength':
+                return <StrengthInfo />;
+            default:
+                return null;
+        }
+    };
 
     return (
         <div className="yoga">
@@ -52,18 +71,11 @@ function Yoga() {
                     <div className="class-description">
                         <h2>{cls.title}</h2>
                         <p>{cls.description}</p>
-                        {showInfo &&  <div>Show Page</div>}
+                        {/* {<div>Show Page</div>} */}
 
-                        <div onClick = {showInfoPage} className="desc-button">More Info</div>
-                        <Dialog open={showInfo}>
-                            {/* <p>{cls.moreInfo.listTitle}</p>
-                            <ul>
-                                {cls.moreInfo.list.map((item, index) =>
-                            <li>{item}</li>
-                            )}
-                            </ul>
-                            <p>Price: {cls.moreInfo.price}</p> */}
-                            <MenoInfo/>
+                        <div onClick={() => showInfoPage(cls.moreInfo)} className="desc-button">More Info</div>
+                        <Dialog open={openDialog === cls.moreInfo} onClose={handleCloseDialog}>
+                            {renderDialogContent(cls.moreInfo)}
                             <div onClick = {showInfoPage} className="dismiss-button">Close
                             </div>
 

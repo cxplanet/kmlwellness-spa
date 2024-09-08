@@ -62,7 +62,7 @@
 .desc-button {
     border: 2px solid;
     border-color: rgb(0, 0, 0);
-    
+    cursor:default; 
 }
 
 .dismiss-button {

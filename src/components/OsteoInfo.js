@@ -2,7 +2,7 @@ function OsteoInfo() {
     return (
         <div>
             <h1>
-                This is my info.
+                This is my Osteo info.
             </h1>
         </div>
     )
