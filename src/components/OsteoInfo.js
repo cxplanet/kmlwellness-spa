@@ -1,9 +1,12 @@
 function OsteoInfo() {
     return (
         <div>
-            <h1>
-                This is my Osteo info.
-            </h1>
+            <h1>Yoga for Osteoporosis</h1>
+            <ul>
+            <li>Learn and practice the twelve poses found to be most beneficial for bone health. Improve posture, balance, coordination, strength and mobility to help prevent the likelihood of falls.</li> 
+            <li>4-week series. Appropriate for all ages and abilities.</li>
+            <li>Cost: $75.00</li>
+            </ul>
         </div>
     )
 }
