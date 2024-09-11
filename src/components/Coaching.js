@@ -48,7 +48,13 @@ const showInfoPage = () => [
                         {showInfo &&  <div>Show Page</div>}
 
                         <div onClick = {showInfoPage} className="desc-button">More Info</div>
-                        <Dialog open={showInfo}>
+                        <Dialog open={showInfo}
+                        PaperProps={{
+                            style: {
+                                backgroundColor: 'transparent',
+                                boxShadow: 'none',
+                            },
+                        }}>
                             {/* <p>{cls.moreInfo.listTitle}</p>
                             <ul>
                                 {cls.moreInfo.list.map((item, index) =>
@@ -56,8 +62,10 @@ const showInfoPage = () => [
                             )}
                             </ul>
                             <p>Price: {cls.moreInfo.price}</p> */}
+                            <div className ="dialog-box">
                             <CoachingInfo/>
                             <div onClick = {showInfoPage} className="dismiss-button">Close
+                            </div>
                             </div>
 
                         </Dialog>

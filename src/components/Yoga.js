@@ -29,7 +29,7 @@ function Yoga() {
         }
     ];
 
-    
+
     const [openDialog, setOpenDialog] = useState(null);
 
     const showInfoPage = (infoType) => {
@@ -39,7 +39,7 @@ function Yoga() {
     const handleCloseDialog = () => {
         setOpenDialog(null);
     };
-    
+
 
     const renderDialogContent = (infoType) => {
         switch (infoType) {
@@ -56,36 +56,44 @@ function Yoga() {
 
     return (
         <div className="yoga">
-        <div>
-            <h1>Teaching Philosophy</h1>
-            <p>My yoga teaching is rooted in my belief that anyone can do yoga and all bodies are yoga bodies. I help my students meet themselves where they are in the present moment and encourage them to employ safe movement and awareness.</p>
-            <p>I invite my students to include a sense of physical and mental challenge in their practice. My focus on anatomy, alignment, and functional movement is motivated by my continued curiosity about the human body and how it works.</p>
-            <p>I am fascinated by the inherent connection between the body and the mind and how the practice of yoga strengthens that connection. I am a graduate of the Pacific Yoga 500-hour Advanced Studies and Curvy Yoga programs.</p>
-        </div>
-        <div className="services">
-        <h2>Classes</h2>
-        <div className="class-list">
-            {classes.map((cls, index) => (
-                <div key={index} className="class-box">
-                    <img src={cls.image} alt={cls.title} className="class-image" />
-                    <div className="class-description">
-                        <h2>{cls.title}</h2>
-                        <p>{cls.description}</p>
-                        {/* {<div>Show Page</div>} */}
+            <div>
+                <h1>Teaching Philosophy</h1>
+                <p>My yoga teaching is rooted in my belief that anyone can do yoga and all bodies are yoga bodies. I help my students meet themselves where they are in the present moment and encourage them to employ safe movement and awareness.</p>
+                <p>I invite my students to include a sense of physical and mental challenge in their practice. My focus on anatomy, alignment, and functional movement is motivated by my continued curiosity about the human body and how it works.</p>
+                <p>I am fascinated by the inherent connection between the body and the mind and how the practice of yoga strengthens that connection. I am a graduate of the Pacific Yoga 500-hour Advanced Studies and Curvy Yoga programs.</p>
+            </div>
+            <div className="services">
+                <h2>Classes</h2>
+                <div className="class-list">
+                    {classes.map((cls, index) => (
+                        <div key={index} className="class-box">
+                            <img src={cls.image} alt={cls.title} className="class-image" />
+                            <div className="class-description">
+                                <h2>{cls.title}</h2>
+                                <p>{cls.description}</p>
+                                {/* {<div>Show Page</div>} */}
 
-                        <div onClick={() => showInfoPage(cls.moreInfo)} className="desc-button">More Info</div>
-                        <Dialog open={openDialog === cls.moreInfo} onClose={handleCloseDialog}>
-                            {renderDialogContent(cls.moreInfo)}
-                            <div onClick = {showInfoPage} className="dismiss-button">Close
+                                <div onClick={() => showInfoPage(cls.moreInfo)} className="desc-button">More Info</div>
+                                <Dialog open={openDialog === cls.moreInfo} onClose={handleCloseDialog}
+                                    PaperProps={{
+                                        style: {
+                                            backgroundColor: 'transparent',
+                                            boxShadow: 'none',
+                                        },
+                                    }}>
+                                    <div className="dialog-box">
+                                        {renderDialogContent(cls.moreInfo)}
+                                        <div onClick={showInfoPage} className="dismiss-button">Close
+                                        </div>
+                                    </div>
+
+                                </Dialog>
                             </div>
-
-                        </Dialog>
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
-    </div>
-    </div>
     );
 }
 

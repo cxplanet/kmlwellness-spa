@@ -1,7 +1,7 @@
 function MenoInfo() {
     return (
         <div>
-            <h1>Yoga for Menopause</h1>
+            <h4>Yoga for Menopause</h4>
             <ul>
             <li>Explore restorative and supportive poses to improve common symptoms of menopause such as hot flashes, insomnia, mood swings, brain fog and more.</li>
             <li>Class meets weekly.</li>
