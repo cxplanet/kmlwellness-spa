@@ -52,7 +52,7 @@ const showInfoPage = () => [
                         PaperProps={{
                             style: {
                                 backgroundColor: 'transparent',
-                                boxShadow: 'none',
+                                boxShadow: 'none'
                             },
                         }}>
                             {/* <p>{cls.moreInfo.listTitle}</p>
