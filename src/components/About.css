@@ -4,21 +4,27 @@
     padding: 20px;
     font-family: 'Arial', sans-serif;
     text-align: center; /* Centered text can add a formal touch to about pages */
+    color: #000000;
 }
 
 .about h1 {
-    color: #333;
+    color: #000000;
     font-size: 28px;
 }
 
 .about h2 {
-    color: #555;
+    color: #000000;
     font-size: 22px;
     margin-bottom: 20px;
 }
 
 .about p {
     font-size: 16px;
-    color: #666;
+    color: #000000;
     line-height: 1.6;
+}
+
+.aboutList {
+    color: #000000;
+    text-align: left;
 }
