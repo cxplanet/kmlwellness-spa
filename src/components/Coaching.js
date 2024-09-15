@@ -1,9 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Coaching.css';
 import './Services.css';
 import { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
 import CoachingInfo from './CoachingInfo';
 
 function Coaching() {
@@ -26,6 +26,12 @@ const [showInfo, setShowInfo] = useState(false);
 const showInfoPage = () => [
     setShowInfo(!showInfo)
 ];
+
+//button that will link to a url
+function ButtonLink({ to, children }) {
+    return <Link to={to} style={{ textDecoration: 'none' }}><button>{children}</button></Link>;
+  }
+
     return (
         <div>
         <div className="coaching">
@@ -36,6 +42,9 @@ const showInfoPage = () => [
             <h3>Your Personal Health Coach</h3>
             <p>As a Functional Medicine Health Coach, I specialize in supporting women through this significant life transition. I’ll meet you where you are, help you identify your unique strengths and guide you in making sustainable lifestyle changes that align with your personal vision of optimal health during this stage of life.</p>
             <p>My training at the Functional Medicine Coaching Academy equips me with a systems-based approach, grounded in scientific evidence, to address the unique challenges of perimenopause and menopause. Together, we will leverage your strengths to cultivate a growth mindset, leading to symptom relief and inspiring personal transformation. I am here to empower you to become your own health advocate, helping you understand the potential root causes of your symptoms and guiding you toward a more balanced, vibrant, and joyful life.</p>
+            <div className="coaching-appt">
+                <ButtonLink to= "https://bookme.name/kmlwellness">Schedule a free 30 minute consulatation</ButtonLink>
+            </div>
         <div className="services">
         <h2>Packages</h2>
         <div className="class-list">
