@@ -46,7 +46,7 @@
     color: #f0f0f0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
     .navbar-inner {
         flex-direction: row;
         justify-content: flex-start;
@@ -61,5 +61,9 @@
     .nav-links {
         flex-grow: 1; /* Allow nav links to grow and take remaining space */
         justify-content: center; /* Center the nav links */
+    }
+
+    .nav-links li a {
+        font-size: 24px; /* Increase font size for larger screens */
     }
 }
