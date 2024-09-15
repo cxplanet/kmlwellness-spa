@@ -5,7 +5,6 @@ import About from './components/About';
 import Services from './components/Services';
 import Yoga from './components/Yoga';
 import Home from './components/Home';
-import BookOnline from './components/BookOnline';
 import Coaching from './components/Coaching';
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
                   <Route path="/coaching" element={<Coaching />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/yoga" element={<Yoga />} />
-                  <Route path="/book-online" element={<BookOnline />} />
                   <Route path="/" element={<Home />} />
               </Routes>
           </div>

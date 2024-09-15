@@ -3,8 +3,7 @@
     margin: 0 auto;
     padding: 20px;
     font-family: 'Arial', sans-serif;
-    text-align: center; /* Centered text can add a formal touch to about pages */
-    color: #000000;
+    text-align: center;  
 }
 
 .about h1 {
