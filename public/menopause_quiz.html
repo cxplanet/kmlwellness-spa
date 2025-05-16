@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What Stage of Menopause Are You In — And What Your Body Might Be Telling You</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    
+    .content-container {
+      max-width: 800px;
+      margin: 1rem auto;
+      padding: 1rem;
+    }
+    
+    /* Navbar styles */
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+    }
+    
+    .navbar-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+    }
+    
+    .navbar-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+    
+    .logo {
+      margin-bottom: 15px;
+      width: 160px;
+      height: auto;
+    }
+    
+    .nav-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links li {
+      padding: 10px 20px;
+    }
+    
+    .nav-links li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    
+    .nav-links li a:hover {
+      color: #f0f0f0;
+    }
+    
+    @media (min-width: 1280px) {
+      .navbar-inner {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      
+      .logo {
+        margin-bottom: 0;
+        margin-right: 20px;
+      }
+      
+      .nav-links {
+        flex-grow: 1;
+        justify-content: center;
+      }
+      
+      .nav-links li a {
+        font-size: 24px;
+      }
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .question p {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+	.question label {
+	  display: block;
+	  margin: 0.3rem 0;
+	  cursor: pointer;
+	}
+/*    .question label {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 1.5rem;
+      gap: 0.4rem;
+      cursor: pointer;
+    }*/
+    .question input[type="radio"],
+    .question input[type="checkbox"] {
+      margin: 0;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #0055aa;
+    }
+    .result {
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      background: #e9ffe9;
+      padding: 1rem;
+      border-left: 5px solid #4CAF50;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+        margin: 0;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="navbar-inner">
+        <img src="/kmlhome.svg" alt="KML Wellness" class="logo">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/coaching">Health Coaching</a></li>
+          <li><a href="/yoga">Yoga</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Quiz Content -->
+  <div class="content-container">
+    <h1>What Stage of Menopause Are You In — And What Your Body Might Be Telling You</h1>
+  <p>Take this quiz to discover where you may be in your menopause journey — and what your body is trying to tell you.</p>
+  <p><strong>Instructions:</strong></p>
+  <ul>
+    <li>Answer all 12 questions.</li>
+    <li>Each answer has an assigned point value.</li>
+    <li>At the end, your total score will determine your stage.</li>
+  </ul>
+
+  <form id="quizForm"></form>
+  <button type="button" onclick="calculateScore()">Submit</button>
+  <div class="result" id="result"></div>
+  </div> <!-- End of content-container -->
+
+  <script>
+    const quiz = [
+      {
+        context: "Most women enter perimenopause between their early 40s and mid-50s.",
+        question: "1. How old are you?",
+        type: "radio",
+        options: [
+          { text: "Under 40", value: 0 },
+          { text: "40–45", value: 1 },
+          { text: "46–51", value: 2 },
+          { text: "Over 51", value: 3 }
+        ]
+      },
+      {
+        context: "Cycle irregularity is often one of the first noticeable signs of perimenopause.",
+        question: "2. How regular are your menstrual cycles?",
+        type: "radio",
+        options: [
+          { text: "Very regular (28–35 days apart)", value: 0 },
+          { text: "Sometimes irregular", value: 2 },
+          { text: "Haven’t had a period in 12+ months", value: 4 },
+          { text: "No periods for years", value: 5 }
+        ]
+      },
+      {
+        context: "Twelve months without a period is the clinical marker for menopause.",
+        question: "3. Have your periods completely stopped for at least a year?",
+        type: "radio",
+        options: [
+          { text: "No", value: 0 },
+          { text: "Yes", value: 5 }
+        ]
+      },
+      {
+        context: "These are some classic symptoms triggered by shifting hormone levels, especially estrogen decline.",
+        question: "4. Are you experiencing any of the following symptoms? (Select all that apply)",
+        type: "checkbox",
+        options: [
+          { text: "Hot flashes", value: 1 },
+          { text: "Night sweats", value: 1 },
+          { text: "Vaginal dryness", value: 1 },
+          { text: "Mood swings", value: 1 },
+          { text: "Brain fog", value: 1 },
+          { text: "Sleep disturbances", value: 1 }
+        ]
+      },
+      {
+        context: "Hormonal changes often lead to fat redistribution, especially around the midsection.",
+        question: "5. Have you noticed an increase in belly fat that’s hard to lose?",
+        type: "radio",
+        options: [
+          { text: "No", value: 0 },
+          { text: "A little, but manageable", value: 1 },
+          { text: "Yes, and it’s been difficult to reduce", value: 2 },
+          { text: "Yes, and it feels like it came out of nowhere", value: 3 }
+        ]
+      },
+      {
+        context: "Current HRT use may affect symptom perception and hormone balance.",
+        question: "6. Are you currently using hormone replacement therapy (HRT)?",
+        type: "radio",
+        options: [
+          { text: "No, never", value: 0 },
+          { text: "I’ve tried it in the past but stopped", value: 1 },
+          { text: "Yes, currently using", value: 2 }
+        ]
+      },
+      {
+        context: "Estrogen helps maintain bone density, and its loss increases fracture risk postmenopause.",
+        question: "7. Have you ever been diagnosed with osteopenia or osteoporosis?",
+        type: "radio",
+        options: [
+          { text: "No", value: 0 },
+          { text: "Yes, osteopenia", value: 2 },
+          { text: "Yes, osteoporosis", value: 3 }
+        ]
+      },
+      {
+        context: "Exercise supports hormone balance, bone health, and weight management.",
+        question: "8. How often do you engage in moderate to intense physical activity?",
+        type: "radio",
+        options: [
+          { text: "Almost never", value: 3 },
+          { text: "1–2 times per week", value: 2 },
+          { text: "3–4 times per week", value: 1 },
+          { text: "5+ times per week", value: 0 }
+        ]
+      },
+      {
+        context: "Fruits and vegetables are anti-inflammatory and support hormonal detoxification.",
+        question: "9. How many servings of fresh fruits and vegetables do you eat daily?",
+        type: "radio",
+        options: [
+          { text: "0–1 servings", value: 3 },
+          { text: "2–3 servings", value: 2 },
+          { text: "4–5 servings", value: 1 },
+          { text: "6+ servings", value: 0 }
+        ]
+      },
+      {
+        context: "Alcohol can worsen symptoms like hot flashes, sleep issues, and belly fat.",
+        question: "10. How often do you consume alcoholic beverages?",
+        type: "radio",
+        options: [
+          { text: "Daily or almost daily", value: 3 },
+          { text: "A few times per week", value: 2 },
+          { text: "Occasionally", value: 1 },
+          { text: "Rarely or never", value: 0 }
+        ]
+      },
+      {
+        context: "Protein supports muscle mass, metabolism, and stable blood sugar during hormonal changes.",
+        question: "11. How often do you eat lean meats or fish?",
+        type: "radio",
+        options: [
+          { text: "Rarely or never", value: 3 },
+          { text: "1–2 times per week", value: 2 },
+          { text: "3–4 times per week", value: 1 },
+          { text: "5+ times per week", value: 0 }
+        ]
+      },
+      {
+        context: "Past HRT use may signal a more intense symptom history or medical recommendation.",
+        question: "12. Have you ever used hormone replacement therapy (HRT)?",
+        type: "radio",
+        options: [
+          { text: "Never", value: 0 },
+          { text: "Yes, briefly in the past", value: 1 },
+          { text: "Yes, for a year or more", value: 2 }
+        ]
+      }
+    ];
+
+    function buildQuiz() {
+      const form = document.getElementById('quizForm');
+      quiz.forEach((q, i) => {
+        const container = document.createElement('div');
+        container.classList.add('question');
+        container.innerHTML = `<p>${q.context}</p><strong>${q.question}</strong><br>`;
+        q.options.forEach((opt, j) => {
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="${q.type}" name="q${i}" value="${opt.value}"> ${opt.text}`;
+          container.appendChild(label);
+        });
+        form.appendChild(container);
+      });
+    }
+
+    function calculateScore() {
+      let score = 0;
+      quiz.forEach((q, i) => {
+        const answers = document.querySelectorAll(`input[name=q${i}]:checked`);
+        answers.forEach(ans => {
+          score += parseInt(ans.value);
+        });
+      });
+
+      let resultText = '';
+      if (score <= 17) {
+        resultText = 'You may be in <strong>Perimenopause</strong> – Hormonal changes are starting or underway.';
+      } else if (score <= 26) {
+        resultText = 'You may be in <strong>Menopause</strong> – No periods for 12+ months, symptoms may peak.';
+      } else {
+        resultText = 'You may be in <strong>Postmenopause</strong> – Time to focus on long-term support for bones, metabolism, and mood.';
+      }
+
+      document.getElementById('result').innerHTML = `<p><strong>Your Total Score: ${score}</strong></p><p>${resultText}</p>`;
+    }
+
+    buildQuiz();
+  </script>
+</body>
+</html>

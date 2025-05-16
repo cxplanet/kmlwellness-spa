@@ -6,6 +6,7 @@ import Services from './components/Services';
 import Yoga from './components/Yoga';
 import Home from './components/Home';
 import Coaching from './components/Coaching';
+import QuizRedirect from './components/QuizRedirect';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
                   <Route path="/coaching" element={<Coaching />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/yoga" element={<Yoga />} />
+                  <Route path="/quiz" element={<QuizRedirect />} />
                   <Route path="/" element={<Home />} />
               </Routes>
           </div>

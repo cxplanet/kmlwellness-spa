@@ -48,7 +48,7 @@
 .home-image img {
     max-width: 100%;
     height: auto;
-    border: 5px solid #000;
+    border: 2px solid #000;
 }
 
 /* Media query for tablets and larger screens */
@@ -76,6 +76,29 @@
         margin-bottom: 20px;
     }
 }
+/* quiz button */
+.button-container {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  .button-link {
+    display: inline-block;
+    border: 2px solid #526404;
+    padding: 0.6rem 1.2rem;
+    background-color: #97ab3c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-link:hover {
+    background-color: #526404;
+  }
+
 
 /* Media query for larger desktop screens */
 @media screen and (min-width: 1200px) {

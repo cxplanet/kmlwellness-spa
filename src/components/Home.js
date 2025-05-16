@@ -20,6 +20,10 @@ function Home() {
                     </ul>
                     <p>What if your symptoms could be relieved or even eliminated and you could regain your energy, your confidence, and your joy?</p>
                     <p>I work with women just like you who are trying to navigate menopause with no support, no answers, and no solutions. I'll work with you to create the lifestyle changes you want to make to not only get your old life back but make your next years even better.</p>
+                    <p>Want to gain insight into your about your journey? Take our free quiz to learn what stage of menopause you are in.</p>
+                    <p className="button-container">
+                        <a href="/menopause_quiz.html" className="button-link">Take the Quiz</a>
+                    </p>                    
                 </div>
                 <div className="home-image">
                     <img src="https://static.wixstatic.com/media/7214ea_27722b57d82f41df8ca48d442550db23~mv2.jpg/v1/crop/x_790,y_0,w_749,h_1400/fill/w_741,h_1400,al_c,q_85,enc_auto/stones-color_edited.jpg" alt="Wellness" />
