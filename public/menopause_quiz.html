@@ -4,6 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>What Stage of Menopause Are You In — And What Your Body Might Be Telling You</title>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HS9Q4WNM5J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HS9Q4WNM5J');
+    
+    // Track page view
+    gtag('event', 'page_view', {
+      page_title: 'Menopause Quiz',
+      page_location: window.location.href,
+      page_path: window.location.pathname + window.location.search
+    });
+  </script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -340,23 +356,56 @@
 
     function calculateScore() {
       let score = 0;
+      const answers = [];
+      
+      // Calculate score and collect answers
       quiz.forEach((q, i) => {
-        const answers = document.querySelectorAll(`input[name=q${i}]:checked`);
-        answers.forEach(ans => {
-          score += parseInt(ans.value);
+        const selected = document.querySelectorAll(`input[name=q${i}]:checked`);
+        const questionAnswers = [];
+        
+        selected.forEach(ans => {
+          const value = parseInt(ans.value);
+          score += value;
+          questionAnswers.push({
+            question: q.question,
+            answer: ans.nextSibling.textContent.trim(),
+            value: value
+          });
         });
+        
+        answers.push(questionAnswers);
       });
 
+      // Determine result
+      let stage = '';
       let resultText = '';
       if (score <= 17) {
+        stage = 'Perimenopause';
         resultText = 'You may be in <strong>Perimenopause</strong> – Hormonal changes are starting or underway.';
       } else if (score <= 26) {
+        stage = 'Menopause';
         resultText = 'You may be in <strong>Menopause</strong> – No periods for 12+ months, symptoms may peak.';
       } else {
+        stage = 'Postmenopause';
         resultText = 'You may be in <strong>Postmenopause</strong> – Time to focus on long-term support for bones, metabolism, and mood.';
       }
 
+      // Display result
       document.getElementById('result').innerHTML = `<p><strong>Your Total Score: ${score}</strong></p><p>${resultText}</p>`;
+      
+      // Track quiz completion in Google Analytics
+      if (typeof gtag === 'function') {
+        gtag('event', 'quiz_complete', {
+          'event_category': 'Quiz',
+          'event_label': 'Menopause Quiz',
+          'value': score,
+          'stage': stage,
+          'total_questions': quiz.length,
+          'answered_questions': answers.filter(a => a.length > 0).length
+        });
+        
+        console.log('Quiz completed!', { score, stage });
+      }
     }
 
     buildQuiz();
