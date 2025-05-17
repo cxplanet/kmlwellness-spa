@@ -9,9 +9,43 @@ import Home from './components/Home';
 import Coaching from './components/Coaching';
 import MenoQuiz from './components/MenoQuiz';
 
-// Initialize Google Analytics
-if (process.env.NODE_ENV === 'production') {
-  ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
+// Initialize Google Analytics with enhanced measurement and cookie settings
+const gaOptions = {
+  debug: process.env.NODE_ENV === 'development',
+  gaOptions: {
+    // Disable automatic cookie configuration
+    storage: 'none',
+    storeGac: false,
+    // Use session storage instead of cookies
+    clientId: window.localStorage.getItem('ga_clientId') || null,
+    // Disable features that require cookies
+    allowAdFeatures: false,
+    allowAdPersonalizationSignals: false,
+    // Disable advertising features
+    restrictDataProcessing: true,
+    // Use server-side tagging if available
+    sendPageView: true
+  },
+  gtagOptions: {
+    // Disable advertising features
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false,
+    // Disable advertising features that require cookies
+    anonymize_ip: true,
+    // Use minimal data collection
+    send_page_view: true
+  }
+};
+
+// Only initialize in production
+if (process.env.REACT_APP_GA_MEASUREMENT_ID) {
+  ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID, gaOptions);
+  
+  // Set a client ID if one doesn't exist
+  if (!window.localStorage.getItem('ga_clientId')) {
+    const clientId = Math.random().toString(36).substring(2) + Date.now().toString(36);
+    window.localStorage.setItem('ga_clientId', clientId);
+  }
 }
 
 // Component to track page views

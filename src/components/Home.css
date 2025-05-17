@@ -38,6 +38,82 @@
     margin-bottom: 15px;
 }
 
+/* Quiz Form Styles */
+.form-container {
+    max-width: 600px;
+    margin: 25px 0;
+}
+
+.quiz-form {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.email-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 14px 20px;
+    font-size: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    height: 54px;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: ##69792a;
+    box-shadow: 0 0 0 3px rgba(42, 42, 114, 0.1);
+}
+
+.quiz-form .button-link {
+    padding: 0 30px;
+    background-color: #97ab3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-form .button-link:hover {
+    background-color: #69792a;
+    transform: translateY(-1px);
+}
+
+.quiz-form .button-link:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .email-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .quiz-form .button-link {
+        width: 100%;
+    }
+}
+
 .home-image {
     flex: 1;
     display: flex;
