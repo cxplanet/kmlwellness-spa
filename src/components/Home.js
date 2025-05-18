@@ -78,9 +78,6 @@ function Home() {
                                 // Save email to DynamoDB via API Gateway
                                 await postToApi('/emails', { email });
                                 
-                                // Store email in localStorage
-                                localStorage.setItem('quizEmail', email);
-                                
                                 // Redirect to quiz
                                 window.location.href = '/menopause_quiz.html';
                             } catch (error) {
