@@ -157,9 +157,9 @@ export default function MenoQuiz() {
     let score = 0;
     
     // Check if any answers have been selected
-    alert(answers);
+    window.alert(answers);
     if (Object.keys(answers).length === 0) {
-      alert('Please answer at least one question before submitting.');
+      window.alert('Please answer at least one question before submitting.');
       return;
     }
 
@@ -226,6 +226,7 @@ export default function MenoQuiz() {
         <button type="button" onClick={calculateScore}>Submit</button>
       </form>
 
+window.alert('Hi');
       {result && (
         <div 
           ref={resultRef}
