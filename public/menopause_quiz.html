@@ -357,11 +357,16 @@
     function calculateScore() {
       let score = 0;
       const answers = [];
+      const unansweredQuestions = [];
       
       // Calculate score and collect answers
       quiz.forEach((q, i) => {
         const selected = document.querySelectorAll(`input[name=q${i}]:checked`);
         const questionAnswers = [];
+        
+        if (selected.length === 0) {
+          unansweredQuestions.push(i);
+        }
         
         selected.forEach(ans => {
           const value = parseInt(ans.value);
@@ -374,6 +379,55 @@
         });
         
         answers.push(questionAnswers);
+      });
+
+      // Validate that all questions are answered
+      if (unansweredQuestions.length > 0) {
+        // Highlight unanswered questions
+        document.querySelectorAll('.question').forEach((questionDiv, idx) => {
+          if (unansweredQuestions.includes(idx)) {
+            questionDiv.style.border = '2px solid #f44336';
+            questionDiv.style.padding = '1rem';
+            questionDiv.style.background = '#fff5f5';
+            questionDiv.style.borderRadius = '4px';
+            
+            // Add warning message if not already present
+            if (!questionDiv.querySelector('.warning-message')) {
+              const warning = document.createElement('p');
+              warning.className = 'warning-message';
+              warning.style.color = '#f44336';
+              warning.style.fontWeight = 'bold';
+              warning.style.marginTop = '0.5rem';
+              warning.style.fontSize = '0.9rem';
+              warning.textContent = '⚠ Please answer this question';
+              questionDiv.appendChild(warning);
+            }
+          } else {
+            // Clear highlighting for answered questions
+            questionDiv.style.border = 'none';
+            questionDiv.style.padding = '0';
+            questionDiv.style.background = 'transparent';
+            const warning = questionDiv.querySelector('.warning-message');
+            if (warning) warning.remove();
+          }
+        });
+        
+        // Display error message
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.background = '#ffe9e9';
+        resultDiv.style.borderLeft = '5px solid #f44336';
+        resultDiv.innerHTML = '<p>Please answer all questions before submitting.</p>';
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // Clear any previous highlighting
+      document.querySelectorAll('.question').forEach(questionDiv => {
+        questionDiv.style.border = 'none';
+        questionDiv.style.padding = '0';
+        questionDiv.style.background = 'transparent';
+        const warning = questionDiv.querySelector('.warning-message');
+        if (warning) warning.remove();
       });
 
       // Determine result
@@ -391,7 +445,20 @@
       }
 
       // Display result
-      document.getElementById('result').innerHTML = `<p><strong>Your Total Score: ${score}</strong></p><p>${resultText}</p>`;
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.background = '#e9ffe9';
+      resultDiv.style.borderLeft = '5px solid #4CAF50';
+      resultDiv.innerHTML = `
+        <p><strong>Your Total Score: ${score}</strong></p>
+        <p>${resultText}</p>
+        <p style="margin-top: 1rem;">
+          <a href="#" onclick="saveQuizResults(event, ${score}, '${stage}', ${JSON.stringify(answers).replace(/'/g, "\\'")})" 
+             style="color: #0066cc; text-decoration: underline; cursor: pointer; font-weight: normal;">
+            💾 Save Quiz Results
+          </a>
+        </p>
+      `;
+      resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
       
       // Track quiz completion in Google Analytics
       if (typeof gtag === 'function') {
@@ -403,8 +470,119 @@
           'total_questions': quiz.length,
           'answered_questions': answers.filter(a => a.length > 0).length
         });
+      }
+    }
+
+    async function saveQuizResults(event, score, stage, answers) {
+      event.preventDefault();
+      
+      // Get current date
+      const date = new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      
+      // Build detailed results text
+      let resultsText = `MENOPAUSE QUIZ RESULTS\n`;
+      resultsText += `${'='.repeat(70)}\n\n`;
+      resultsText += `Date: ${date}\n`;
+      resultsText += `Total Score: ${score}\n`;
+      resultsText += `Stage: ${stage}\n\n`;
+      resultsText += `${'='.repeat(70)}\n\n`;
+      
+      // Add title
+      resultsText += `What Stage of Menopause Are You In — And What Your Body Might Be Telling You\n\n`;
+      resultsText += `${'='.repeat(70)}\n\n`;
+      
+      // Add all questions with context and answers
+      quiz.forEach((q, idx) => {
+        resultsText += `QUESTION ${idx + 1}\n`;
+        resultsText += `${'-'.repeat(70)}\n`;
+        resultsText += `Context: ${q.context}\n\n`;
+        resultsText += `${q.question}\n\n`;
         
-        console.log('Quiz completed!', { score, stage });
+        // List all options
+        q.options.forEach(opt => {
+          const isSelected = answers[idx] && answers[idx].some(ans => ans.answer === opt.text);
+          const marker = isSelected ? '✓' : ' ';
+          resultsText += `  [${marker}] ${opt.text}\n`;
+        });
+        
+        resultsText += `\n`;
+      });
+      
+      resultsText += `${'='.repeat(70)}\n\n`;
+      resultsText += `RESULTS INTERPRETATION\n`;
+      resultsText += `${'='.repeat(70)}\n\n`;
+      if (stage === 'Perimenopause') {
+        resultsText += `You may be in Perimenopause – Hormonal changes are starting or underway.\n\n`;
+        resultsText += `Perimenopause is the transitional phase before menopause when hormone levels\n`;
+        resultsText += `begin to fluctuate. This stage can last several years and is characterized by\n`;
+        resultsText += `irregular periods and various symptoms as your body adjusts to changing\n`;
+        resultsText += `estrogen and progesterone levels.\n`;
+      } else if (stage === 'Menopause') {
+        resultsText += `You may be in Menopause – No periods for 12+ months, symptoms may peak.\n\n`;
+        resultsText += `Menopause is officially diagnosed after 12 consecutive months without a period.\n`;
+        resultsText += `This marks the end of your reproductive years. Symptoms may be at their peak\n`;
+        resultsText += `during this time as your body continues to adjust to lower hormone levels.\n`;
+      } else {
+        resultsText += `You may be in Postmenopause – Time to focus on long-term support for bones,\n`;
+        resultsText += `metabolism, and mood.\n\n`;
+        resultsText += `Postmenopause refers to the years after menopause. While some symptoms may\n`;
+        resultsText += `ease, it's important to focus on long-term health, including bone density,\n`;
+        resultsText += `cardiovascular health, and maintaining a healthy weight.\n`;
+      }
+      
+      // Use File System Access API if available (Chrome, Edge), otherwise fallback to download
+      const fileName = `menopause-quiz-results-${new Date().toISOString().split('T')[0]}.txt`;
+      
+      if ('showSaveFilePicker' in window) {
+        // Modern browsers with File System Access API
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: fileName,
+            types: [{
+              description: 'Text Files',
+              accept: { 'text/plain': ['.txt'] }
+            }]
+          });
+          
+          const writable = await handle.createWritable();
+          await writable.write(resultsText);
+          await writable.close();
+        } catch (err) {
+          // User cancelled or error occurred
+          if (err.name !== 'AbortError') {
+            console.error('Error saving file:', err);
+            // Fallback to download
+            downloadFile(resultsText, fileName);
+          }
+        }
+      } else {
+        // Fallback for browsers without File System Access API
+        downloadFile(resultsText, fileName);
+      }
+      
+      function downloadFile(content, filename) {
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+      
+      // Track save action in Google Analytics
+      if (typeof gtag === 'function') {
+        gtag('event', 'save_results', {
+          'event_category': 'Quiz',
+          'event_label': 'Menopause Quiz Results Saved',
+          'value': score
+        });
       }
     }
 
