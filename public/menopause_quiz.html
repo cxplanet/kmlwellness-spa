@@ -357,6 +357,9 @@
       });
     }
 
+    // Global variable to store quiz results
+    let currentQuizResults = null;
+
     function calculateScore() {
       let score = 0;
       const answers = [];
@@ -436,6 +439,13 @@
         resultText = 'You may be in <strong>Postmenopause</strong> – Time to focus on long-term support for bones, metabolism, and mood.';
       }
 
+      // Store results globally for save functions
+      currentQuizResults = {
+        score: score,
+        stage: stage,
+        answers: answers
+      };
+
       // Display result
       const resultDiv = document.getElementById('result');
       resultDiv.style.background = '#e9ffe9';
@@ -444,11 +454,11 @@
         <p><strong>Your Total Score: ${score}</strong></p>
         <p>${resultText}</p>
         <p style="margin-top: 1rem;">
-          <a href="#" onclick="saveQuizResultsAsPDF(event, ${score}, '${stage}', ${JSON.stringify(answers).replace(/'/g, "\\'")})" 
+          <a href="#" onclick="saveQuizResultsAsPDF(event)" 
              style="color: #0066cc; text-decoration: underline; cursor: pointer; font-weight: normal; margin-right: 1.5rem;">
             📄 Save as PDF
           </a>
-          <a href="#" onclick="saveQuizResults(event, ${score}, '${stage}', ${JSON.stringify(answers).replace(/'/g, "\\'")})" 
+          <a href="#" onclick="saveQuizResults(event)" 
              style="color: #0066cc; text-decoration: underline; cursor: pointer; font-weight: normal;">
             💾 Save as Text
           </a>
@@ -469,8 +479,15 @@
       }
     }
 
-    async function saveQuizResults(event, score, stage, answers) {
+    async function saveQuizResults(event) {
       event.preventDefault();
+      
+      if (!currentQuizResults) {
+        alert('Please complete the quiz first.');
+        return;
+      }
+      
+      const { score, stage, answers } = currentQuizResults;
       
       // Get current date
       const date = new Date().toLocaleDateString('en-US', { 
@@ -582,8 +599,15 @@
       }
     }
 
-    function saveQuizResultsAsPDF(event, score, stage, answers) {
+    async function saveQuizResultsAsPDF(event) {
       event.preventDefault();
+      
+      if (!currentQuizResults) {
+        alert('Please complete the quiz first.');
+        return;
+      }
+      
+      const { score, stage, answers } = currentQuizResults;
       
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
@@ -687,9 +711,37 @@
       const interpretationLines = doc.splitTextToSize(interpretation, maxWidth);
       doc.text(interpretationLines, margin, yPos);
       
-      // Save the PDF
+      // Save the PDF with File System Access API if available
       const fileName = `menopause-quiz-results-${new Date().toISOString().split('T')[0]}.pdf`;
-      doc.save(fileName);
+      
+      if ('showSaveFilePicker' in window) {
+        // Modern browsers with File System Access API
+        try {
+          const pdfBlob = doc.output('blob');
+          const handle = await window.showSaveFilePicker({
+            suggestedName: fileName,
+            types: [{
+              description: 'PDF Files',
+              accept: { 'application/pdf': ['.pdf'] }
+            }]
+          });
+          
+          const writable = await handle.createWritable();
+          await writable.write(pdfBlob);
+          await writable.close();
+        } catch (err) {
+          // User cancelled or error occurred
+          if (err.name !== 'AbortError') {
+            console.error('Error saving PDF:', err);
+            // Fallback to direct download
+            doc.save(fileName);
+          }
+        }
+      } else {
+        // Fallback for browsers without File System Access API
+        console.log('Saving PDF with direct download');
+        doc.save(fileName);
+      }
       
       // Track PDF save action in Google Analytics
       if (typeof gtag === 'function') {
