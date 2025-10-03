@@ -34,7 +34,7 @@ const quizData = [
     ]
   },
   {
-    context: "These are some classic symptoms triggered by shifting hormone levels, especially estrogen decline.",
+    context: "These are some common symptoms triggered by shifting hormone levels, especially estrogen decline.",
     question: "4. Are you experiencing any of the following symptoms? (Select all that apply)",
     type: "checkbox",
     options: [
@@ -44,6 +44,9 @@ const quizData = [
       { text: "Mood swings", value: 1 },
       { text: "Brain fog", value: 1 },
       { text: "Sleep disturbances", value: 1 }
+      { text: "Digestive Issues", value: 1 }
+      { text: "Joint or muscle pain", value: 1 }
+      { text: "Loss of libido", value: 1 }
     ]
   },
   {
