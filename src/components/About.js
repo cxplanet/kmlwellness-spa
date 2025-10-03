@@ -10,7 +10,7 @@ function About() {
             Through self study and working with a Functional Medicine doctor, I have come to learn the importance of bio-identical HRT. I have become focused on improving my bone density with a combination of yoga, HIIT and weight lifting. I have also improved my incontinence with a regular pelvic floor strengthening routine. I have learned the importance of keeping my hormones inn balance and have started HRT.</p>
             <h1>My Mission - Supporting Your Strength, Energy and Confidence</h1>
             <p>I help women cut through the noise of menopause advice to feel strong, clear and empowered in their health decisions.</p>
-            <p> Whether your considering HRT, struggling with sleep or stress, or looking to build strength and stability for the years ahead, I'm here to guide you. Together we'll create a plan that supports your body, your hormones and your lifestyl  - so you can thrive with confidence, energy and balance</p>
+            <p> Whether you're considering HRT, struggling with sleep or stress, or looking to build strength and stability for the years ahead, I'm here to guide you. Together we'll create a plan that supports your body, your hormones and your lifestyl  - so you can thrive with confidence, energy and balance</p>
         </div>
     );
 }
