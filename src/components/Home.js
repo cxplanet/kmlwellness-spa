@@ -65,7 +65,7 @@ function Home() {
                         <li>Night Sweats</li>
                     </ul>
                     <p>What if your symptoms could be relieved or even eliminated and you could regain your energy, your confidence, and your joy?</p>
-                    <p>I work with women just like you who are trying to navigate menopause with no support, no answers, and no solutions. I'll work with you to create the lifestyle changes you want to make to not only get your old life back but make your next years even better.</p>
+                    <p>I help to empower women just like you to cut through the conflicting information about menopause to decide how they will journey through menopause with clarity and confidence so they can feel energized and excited again. I'll work with you to create the lifestyle changes you want to not only get your old life back but make your next years even better.</p>
                     <p>Want to gain insight into your journey? Take our free quiz to learn what stage of menopause you are in.</p>
                     <div className="form-container">
                         <form onSubmit={async (e) => {
