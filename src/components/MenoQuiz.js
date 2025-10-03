@@ -43,9 +43,9 @@ const quizData = [
       { text: "Vaginal dryness", value: 1 },
       { text: "Mood swings", value: 1 },
       { text: "Brain fog", value: 1 },
-      { text: "Sleep disturbances", value: 1 }
-      { text: "Digestive Issues", value: 1 }
-      { text: "Joint or muscle pain", value: 1 }
+      { text: "Sleep disturbances", value: 1 },
+      { text: "Digestive Issues", value: 1 },
+      { text: "Joint or muscle pain", value: 1 },
       { text: "Loss of libido", value: 1 }
     ]
   },
