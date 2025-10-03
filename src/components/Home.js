@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import { post } from 'aws-amplify/api';
 
@@ -48,6 +49,7 @@ async function postToApi(path, data) {
 }
 
 function Home() {
+    const navigate = useNavigate();
     return (
         <div className="home-container">
             <div className="home-content">
@@ -59,10 +61,6 @@ function Home() {
                         <li>Stubborn belly fat</li>
                         <li>Unwanted weight gain</li>
                         <li>Chronic fatigue</li>
-                        <li>Insomnia</li>
-                        <li>Stress</li>
-                        <li>Hot flashes</li>
-                        <li>Night Sweats</li>
                     </ul>
                     <p>What if your symptoms could be relieved or even eliminated and you could regain your energy, your confidence, and your joy?</p>
                     <p>I work with women just like you who are trying to navigate menopause with no support, no answers, and no solutions. I'll work with you to create the lifestyle changes you want to make to not only get your old life back but make your next years even better.</p>
@@ -79,7 +77,7 @@ function Home() {
                                 await postToApi('/emails', { email });
                                 
                                 // Redirect to quiz
-                                window.location.href = '/menopause_quiz.html';
+                                navigate('/quiz');
                             } catch (error) {
                                 console.error('Error saving email:', error);
                                 alert('Failed to save your email. Please try again.');
