@@ -37,7 +37,7 @@ const quizData = [
   {
     context: "These are some common symptoms triggered by shifting hormone levels, especially estrogen decline.",
     question: "4. Are you experiencing any of the following symptoms? (Select all that apply)",
-    type: "checkbox",
+        type: "checkbox",
     options: [
       { text: "Hot flashes", value: 1 },
       { text: "Night sweats", value: 1 },
@@ -157,7 +157,12 @@ const Results = ({ result, messageRef }) => {
     
     doc.setFontSize(16);
     doc.setFont(undefined, 'bold');
-    doc.text('MENOPAUSE QUIZ RESULTS', margin, yPos);
+    const title = 'What Stage of Menopause Are You In — And What Your Body Might Be Telling You';
+    const titleLines = doc.splitTextToSize(title, maxWidth);
+    doc.text(titleLines, margin, yPos);
+    yPos += titleLines.length * 8; // Adjust spacing based on number of lines
+
+    doc.text('Quiz Results', margin, yPos);
     yPos += 10;
     
     doc.setFontSize(11);
@@ -166,18 +171,29 @@ const Results = ({ result, messageRef }) => {
     yPos += 7;
     doc.text(`Total Score: ${score}`, margin, yPos);
     yPos += 7;
-    doc.text(`Stage: ${stage.replace(/\*\*/g, '')}`, margin, yPos);
-    yPos += 12;
-    
-    doc.setFontSize(12);
-    doc.setFont(undefined, 'bold');
-    const titleLines = doc.splitTextToSize('What Stage of Menopause Are You In — And What Your Body Might Be Telling You', maxWidth);
-    doc.text(titleLines, margin, yPos);
-    yPos += (titleLines.length * 7) + 10;
+    const stageText = `Stage: ${stage.replace(/\*\*/g, '')}`;
+    const stageLines = doc.splitTextToSize(stageText, maxWidth);
+    doc.text(stageLines, margin, yPos);
+    yPos += stageLines.length * 5 + 7; // Dynamic height based on lines + padding
     
     doc.setFontSize(10);
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const bottomMargin = 20;
+
     quizData.forEach((q, idx) => {
-      if (yPos > 250) {
+      // Calculate the height of the entire question block before rendering
+      const contextLines = doc.splitTextToSize(`Context: ${q.context}`, maxWidth);
+      const questionLines = doc.splitTextToSize(q.question, maxWidth);
+      let optionsHeight = 0;
+      q.options.forEach(opt => {
+        const optionLines = doc.splitTextToSize(opt.text, maxWidth - 5);
+        optionsHeight += optionLines.length * 5;
+      });
+
+      const blockHeight = (contextLines.length * 5) + 3 + (questionLines.length * 5) + 5 + optionsHeight + 6;
+
+      // If the block doesn't fit, add a new page
+      if (yPos + blockHeight > pageHeight - bottomMargin) {
         doc.addPage();
         yPos = 20;
       }
@@ -187,138 +203,83 @@ const Results = ({ result, messageRef }) => {
       yPos += 7;
       
       doc.setFont(undefined, 'italic');
-      const contextLines = doc.splitTextToSize(`Context: ${q.context}`, maxWidth);
       doc.text(contextLines, margin, yPos);
       yPos += (contextLines.length * 5) + 3;
       
       doc.setFont(undefined, 'bold');
-      const questionLines = doc.splitTextToSize(q.question, maxWidth);
       doc.text(questionLines, margin, yPos);
       yPos += (questionLines.length * 5) + 5;
       
       doc.setFont(undefined, 'normal');
       q.options.forEach(opt => {
         const isSelected = answers[idx] && (q.type === 'checkbox' ? answers[idx].includes(opt.text) : answers[idx].includes(String(opt.value)));
-        const marker = isSelected ? '[✓]' : '[ ]';
-        const optionText = `${marker} ${opt.text}`;
-        const optionLines = doc.splitTextToSize(optionText, maxWidth - 5);
+        
+        if (isSelected) {
+          doc.setFont(undefined, 'bold');
+        }
+
+        const optionLines = doc.splitTextToSize(opt.text, maxWidth - 5);
         doc.text(optionLines, margin + 5, yPos);
         yPos += (optionLines.length * 5);
+
+        // Reset font to normal after rendering the option
+        doc.setFont(undefined, 'normal');
       });
       
-      yPos += 8;
+      yPos += 6;
     });
     
-    doc.addPage();
-    yPos = 20;
+    // doc.addPage();
+    // yPos = 20;
     
-    doc.setFontSize(14);
-    doc.setFont(undefined, 'bold');
-    doc.text('RESULTS INTERPRETATION', margin, yPos);
-    yPos += 10;
+    // doc.setFontSize(14);
+    // doc.setFont(undefined, 'bold');
+    // doc.text('RESULTS INTERPRETATION', margin, yPos);
+    // yPos += 10;
     
-    doc.setFontSize(10);
-    doc.setFont(undefined, 'normal');
+    // doc.setFontSize(10);
+    // doc.setFont(undefined, 'normal');
     
-    let interpretation = '';
-    if (stage.includes('Perimenopause')) {
-      interpretation = `You may be in Perimenopause – Hormonal changes are starting or underway.\n\nPerimenopause is the transitional phase before menopause when hormone levels begin to fluctuate. This stage can last several years and is characterized by irregular periods and various symptoms as your body adjusts to changing estrogen and progesterone levels.`;
-    } else if (stage.includes('Menopause')) {
-      interpretation = `You may be in Menopause – No periods for 12+ months, symptoms may peak.\n\nMenopause is officially diagnosed after 12 consecutive months without a period. This marks the end of your reproductive years. Symptoms may be at their peak during this time as your body continues to adjust to lower hormone levels.`;
-    } else {
-      interpretation = `You may be in Postmenopause – Time to focus on long-term support for bones, metabolism, and mood.\n\nPostmenopause refers to the years after menopause. While some symptoms may ease, it's important to focus on long-term health, including bone density, cardiovascular health, and maintaining a healthy weight.`;
-    }
+    // let interpretation = '';
+    // if (stage.includes('Perimenopause')) {
+    //   interpretation = `You may be in Perimenopause – Hormonal changes are starting or underway.\n\nPerimenopause is the transitional phase before menopause when hormone levels begin to fluctuate. This stage can last several years and is characterized by irregular periods and various symptoms as your body adjusts to changing estrogen and progesterone levels.`;
+    // } else if (stage.includes('Menopause')) {
+    //   interpretation = `You may be in Menopause – No periods for 12+ months, symptoms may peak.\n\nMenopause is officially diagnosed after 12 consecutive months without a period. This marks the end of your reproductive years. Symptoms may be at their peak during this time as your body continues to adjust to lower hormone levels.`;
+    // } else {
+    //   interpretation = `You may be in Postmenopause – Time to focus on long-term support for bones, metabolism, and mood.\n\nPostmenopause refers to the years after menopause. While some symptoms may ease, it's important to focus on long-term health, including bone density, cardiovascular health, and maintaining a healthy weight.`;
+    // }
     
-    interpretation.split('\n\n').forEach(paragraph => {
-      const lines = doc.splitTextToSize(paragraph, maxWidth);
-      doc.text(lines, margin, yPos);
-      yPos += (lines.length * 5) + 5; // Add space between paragraphs
-    });
+    // interpretation.split('\n\n').forEach(paragraph => {
+    //   const lines = doc.splitTextToSize(paragraph, maxWidth);
+    //   doc.text(lines, margin, yPos);
+    //   yPos += (lines.length * 5) + 5; // Add space between paragraphs
+    // });
     
     const fileName = `menopause-quiz-results-${new Date().toISOString().split('T')[0]}.pdf`;
     doc.save(fileName);
   };
 
-  const saveQuizResultsAsText = () => {
-    const date = new Date().toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
-    
-    let resultsText = `MENOPAUSE QUIZ RESULTS\n`;
-    resultsText += `${'='.repeat(70)}\n\n`;
-    resultsText += `Date: ${date}\n`;
-    resultsText += `Total Score: ${score}\n`;
-    resultsText += `Stage: ${stage.replace(/\*\*/g, '')}\n\n`;
-    resultsText += `${'='.repeat(70)}\n\n`;
-    
-    resultsText += `What Stage of Menopause Are You In — And What Your Body Might Be Telling You\n\n`;
-    resultsText += `${'='.repeat(70)}\n\n`;
-    
-    quizData.forEach((q, idx) => {
-      resultsText += `QUESTION ${idx + 1}\n`;
-      resultsText += `${'-'.repeat(70)}\n`;
-      resultsText += `Context: ${q.context}\n\n`;
-      resultsText += `${q.question}\n\n`;
-      
-      q.options.forEach(opt => {
-        const isSelected = answers[idx] && (quizData[idx].type === 'checkbox' ? answers[idx].includes(opt.text) : answers[idx].includes(String(opt.value)));
-        const marker = isSelected ? '✓' : ' ';
-        resultsText += `  [${marker}] ${opt.text}\n`;
-      });
-      
-      resultsText += `\n`;
-    });
-    
-    resultsText += `${'='.repeat(70)}\n\n`;
-    resultsText += `RESULTS INTERPRETATION\n`;
-    resultsText += `${'='.repeat(70)}\n\n`;
-    if (stage.includes('Perimenopause')) {
-      resultsText += `You may be in Perimenopause – Hormonal changes are starting or underway.\n\n`;
-      resultsText += `Perimenopause is the transitional phase before menopause when hormone levels\n`;
-      resultsText += `begin to fluctuate. This stage can last several years and is characterized by\n`;
-      resultsText += `irregular periods and various symptoms as your body adjusts to changing\n`;
-      resultsText += `estrogen and progesterone levels.\n`;
-    } else if (stage.includes('Menopause')) {
-      resultsText += `You may be in Menopause – No periods for 12+ months, symptoms may peak.\n\n`;
-      resultsText += `Menopause is officially diagnosed after 12 consecutive months without a period.\n`;
-      resultsText += `This marks the end of your reproductive years. Symptoms may be at their peak\n`;
-      resultsText += `during this time as your body continues to adjust to lower hormone levels.\n`;
-    } else {
-      resultsText += `You may be in Postmenopause – Time to focus on long-term support for bones,\n`;
-      resultsText += `metabolism, and mood.\n\n`;
-      resultsText += `Postmenopause refers to the years after menopause. While some symptoms may\n`;
-      resultsText += `ease, it's important to focus on long-term health, including bone density,\n`;
-      resultsText += `cardiovascular health, and maintaining a healthy weight.\n`;
-    }
-
-    const fileName = `menopause-quiz-results-${new Date().toISOString().split('T')[0]}.txt`;
-    const blob = new Blob([resultsText], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
 
   const StageDisplay = ({ stage }) => {
-    console.log('Stage variable:', stage);
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    const parts = stage.split(boldRegex);
+    const paragraphs = stage.split('\n\n');
 
     return (
-      <p>
-        {parts.map((part, index) => {
-          if (index % 2 === 1) {
-            return <strong key={index}>{part}</strong>;
-          }
-          return part;
+      <div>
+        {paragraphs.map((paragraph, pIndex) => {
+          const boldRegex = /\*\*(.*?)\*\*/g;
+          const parts = paragraph.split(boldRegex);
+          return (
+            <p key={pIndex}>
+              {parts.map((part, index) => {
+                if (index % 2 === 1) {
+                  return <strong key={index}>{part}</strong>;
+                }
+                return part;
+              })}
+            </p>
+          );
         })}
-      </p>
+      </div>
     );
   };
 
@@ -326,12 +287,12 @@ const Results = ({ result, messageRef }) => {
     <div 
       ref={messageRef}
       className="result"
+      style={{ marginTop: "2rem", fontWeight: "bold", background: "#e9ffe9", padding: "1rem", borderLeft: "5px solid #4CAF50" }}
     >
       <p><strong>Your Total Score: {score}</strong></p>
       <StageDisplay stage={stage} />
       <div style={{ marginTop: '1rem' }}>
-        <button onClick={saveQuizResultsAsPDF} style={{ marginRight: '1rem' }}>Save as PDF</button>
-        <button onClick={saveQuizResultsAsText}>Save as Text</button>
+        <button onClick={saveQuizResultsAsPDF}>Save Results</button>
       </div>
     </div>
   );
@@ -408,13 +369,18 @@ export default function MenoQuiz() {
     });
 
     let stage = "";
+    let interpretation = "";
     if (score <= 17) {
       stage = "You may be in **Perimenopause** – Hormonal changes are starting or underway.";
+      interpretation = `Perimenopause is the transitional phase before menopause when hormone levels begin to fluctuate. This stage can last several years and is characterized by irregular periods and various symptoms as your body adjusts to changing estrogen and progesterone levels.`;
     } else if (score <= 26) {
       stage = "You may be in **Menopause** – No periods for 12+ months, symptoms may peak.";
+      interpretation = `Menopause is officially diagnosed after 12 consecutive months without a period. This marks the end of your reproductive years. Symptoms may be at their peak during this time as your body continues to adjust to lower hormone levels.`;
     } else {
       stage = "You may be in **Postmenopause** – Time to focus on long-term support for bones, metabolism, and mood.";
+      interpretation = `Postmenopause refers to the years after menopause. While some symptoms may ease, it's important to focus on long-term health, including bone density, cardiovascular health, and maintaining a healthy weight.`;
     }
+    stage += `\n\n${interpretation}`;
     
     setError("");
     setUnansweredQuestions(new Set());
