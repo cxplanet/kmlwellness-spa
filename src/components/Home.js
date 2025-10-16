@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import './HomeGrid.css';
 import { post } from 'aws-amplify/api';
 
 // Helper function to make API calls
@@ -51,20 +52,57 @@ async function postToApi(path, data) {
 function Home() {
     const navigate = useNavigate();
     return (
-        <div className="home-container">
-            <div className="home-content">
-                <div className="home-text">
-                    <h1>Regain the You</h1>
-                    <h2>You Used to Be</h2>
-                    <p>Do you struggle with:</p>
-                    <ul>
-                        <li>Stubborn belly fat</li>
-                        <li>Unwanted weight gain</li>
-                        <li>Chronic fatigue</li>
-                    </ul>
-                    <p>What if your symptoms could be relieved or even eliminated and you could regain your energy, your confidence, and your joy?</p>
-                    <p>I help to empower women just like you to cut through the conflicting information about menopause to decide how they will journey through menopause with clarity and confidence so they can feel energized and excited again. I'll work with you to create the lifestyle changes you want to not only get your old life back but make your next years even better.</p>
-                    <p>Want to gain insight into your journey? Take our free quiz to learn what stage of menopause you are in.</p>
+        <div>
+            <div className="home-grid-container">
+                {/* Row 1 */}
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="/kml_mugshot.jpg" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Welcome</h3>
+                        <p>I’m Kathleen, your personal menopause coach. I empower women to cut through the conflicting information to decide how they will journey through menopause with clarity and confidence so they can feel energized and excited again.</p>
+                    </div>
+                </div>
+                <div className="hr-separator">
+                    <hr />
+                    <div className="hr-separator-text"><h3>The symptoms you experience during menopause aren’t the same as anyone else’s.</h3>
+                    <h3>Let’s create your unique path to move from striving to thriving.</h3></div>
+                    <hr />
+                </div>
+                {/* Row 2 */}
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="https://media.istockphoto.com/id/1221871797/photo/fitness-concept.jpg?s=1024x1024&w=is&k=20&c=QcaOZMNI7C4MoOMeiLtvRbDN__mbboAAYUrpsIKJ7k4=" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Lifestyle</h3>
+                        <p>Your nutritional, movement, sleep and stress management needs change as you enter and progress through menopause. We will work together to explore what’s working and what can be modified, added or eliminated.</p>
+                    </div>
+                </div>
+                {/* Row 3 */}
+                <div className="grid-item text-right">
+                    <div className="grid-image">
+                        <img src="https://media.istockphoto.com/id/1337232909/photo/handwritten-word-hormones-on-the-blackboard-and-glasses.jpg?s=1024x1024&w=is&k=20&c=LgQZ43C1uvmBJzvdRgqCEKz6PEpgTDzf3SoIJnFNxsc=" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Hormone Therapy</h3>
+                        <p>As a certified functional medicine coach, I will help you find the latest research about Hormone Replacement Therapy (HRT) to determine if its an option you’d like to explore. I will also help you find resources you can use to advocate for this  choice with your medical practitioner. If HRT is not of interest, we’ll explore other otpions for symptom relief.</p>
+                    </div>
+                </div>
+                {/* Row 4 */}
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="https://media.istockphoto.com/id/1361356256/vector/messy-organization-in-planner-semi-flat-color-vector-object.jpg?s=1024x1024&w=is&k=20&c=RAWPehjV3y2ynlLyrP-YHgJkSZM3fOwmq-hwY-oRnLo=" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Consistency and Balance</h3>
+                        <p>You are ready to stop just surviving in menopause, feeling confused, exhausted and stressed. Together we will build foundational habits to help you feel like you’re building a lifestyle that ensures you will survive through menopause and beyond.</p>
+                    </div>
+                </div>
+                <div className="hr-separator">
+              <hr />
+              <p>Want to gain insight into your journey? Take our free quiz to learn what stage of menopause you are in.</p>
                     <div className="form-container">
                         <form onSubmit={async (e) => {
                             e.preventDefault();
@@ -100,13 +138,10 @@ function Home() {
                                 <button type="submit" className="button-link">Take the Quiz</button>
                             </div>
                         </form>
-                    </div>                    
-                </div>
-                <div className="home-image">
-                    <img src="https://static.wixstatic.com/media/7214ea_27722b57d82f41df8ca48d442550db23~mv2.jpg/v1/crop/x_790,y_0,w_749,h_1400/fill/w_741,h_1400,al_c,q_85,enc_auto/stones-color_edited.jpg" alt="Wellness" />
-                </div>
+                    </div>
             </div>
         </div>
+    </div>
     );
 }
 

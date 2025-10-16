@@ -41,7 +41,7 @@
 /* Quiz Form Styles */
 .form-container {
     max-width: 600px;
-    margin: 25px 0;
+    margin: 25px auto;
 }
 
 .quiz-form {
@@ -68,7 +68,7 @@
 
 .email-input:focus {
     outline: none;
-    border-color: ##69792a;
+    border-color: #69792a;
     box-shadow: 0 0 0 3px rgba(42, 42, 114, 0.1);
 }
 
