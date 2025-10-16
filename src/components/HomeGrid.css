@@ -1,0 +1,103 @@
+.home-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 100px;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.grid-item.text-right {
+    flex-direction: row-reverse;
+}
+
+.grid-image {
+    max-width: 25%;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+}
+
+.grid-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+.grid-text {
+    flex: 1;
+    padding: 50px;
+}
+
+.grid-text h3 {
+    text-align: center;
+    font-size: 24px;
+}
+
+.grid-text p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .grid-item,
+    .grid-item.text-right {
+        flex-direction: column;
+    }
+
+    .grid-image {
+        max-width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .grid-text {
+        text-align: center;
+    }
+}
+
+.hr-with-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hr-with-text::before,
+.hr-with-text::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+
+.hr-with-text:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.hr-with-text:not(:empty)::after {
+    margin-left: .5em;
+}
+
+.hr-separator {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hr-separator hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+}
+
+.hr-separator-text {
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
