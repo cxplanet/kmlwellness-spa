@@ -61,7 +61,12 @@ function Home() {
                     </div>
                     <div className="grid-text">
                         <h3>Welcome</h3>
-                        <p>I’m Kathleen, your personal menopause coach. I empower women to cut through the conflicting information to decide how they will journey through menopause with clarity and confidence so they can feel energized and excited again.</p>
+                        <p>I’m Kathleen, your personal menopause coach. I empower women to cut through the conflicting information to decide 
+                          how they will journey through menopause with clarity and confidence so they can feel energized and excited again.</p>
+                        <p>
+                          As a Certified Functional Medicine Coach, I will work side-by-side with you to make your Menopause Journey easier so you can regain your energy and confidence and chart your course for the next chapter of your life. I do not provide medical advise and will, 
+                          when necessary, refer you to your personal medical practitioner.   
+                        </p>
                     </div>
                 </div>
                 <div className="hr-separator">

@@ -46,6 +46,26 @@
     line-height: 1.6;
 }
 
+.cta-button {
+    background-color: #97ab3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #69792a;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .grid-item,
     .grid-item.text-right {

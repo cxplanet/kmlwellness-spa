@@ -14,6 +14,7 @@ function Navbar() {
                         <li><Link to="/about">About</Link></li>
                         <li><Link to="/coaching">Health Coaching</Link></li>
                         <li><Link to="/yoga">Yoga</Link></li>
+                        <li><a href="mailto:kathleen.meehanlorenzo@gmail.com">Contact</a></li>
                     </ul>
                 </div>
             </div>

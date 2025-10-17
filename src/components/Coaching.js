@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Coaching.css';
 import './Services.css';
+import './HomeGrid.css';
 import { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import CoachingInfo from './CoachingInfo';
@@ -34,57 +35,80 @@ function ButtonLink({ to, children }) {
 
     return (
         <div>
-        <div className="coaching">
-            <h1>Coaching for Menopause</h1>
-            <p>Navigating the journey of menopause can be challenging. There are so many potential symptoms and every woman experiences this time of life differently. Sometimes you don’t even recognize the person these symptoms have created! Hot flashes, night sweats, poor sleep, the inability to lose weight and increased belly fat even though you’re working out as hard as you ever have, stress, brain fog, and fatigue to name just a few. And then there are the consequences of hormonal imbalance in your overall health. Osteoporosis, heart disease, incontinence, and more.</p>
-            <h2>How We Can Help</h2>
-            <p>How do you find a way to relieve these symptoms and become the woman you used to be? Or become even better? How do you make this stage of your life and beyond a happy, joyful time?</p>
-            <h3>Your Personal Health Coach</h3>
-            <p>As a Functional Medicine Health Coach, I specialize in supporting women through this significant life transition. I’ll meet you where you are, help you identify your unique strengths and guide you in making sustainable lifestyle changes that align with your personal vision of optimal health during this stage of life.</p>
-            <p>My training at the Functional Medicine Coaching Academy equips me with a systems-based approach, grounded in scientific evidence, to address the unique challenges of perimenopause and menopause. Together, we will leverage your strengths to cultivate a growth mindset, leading to symptom relief and inspiring personal transformation. I am here to empower you to become your own health advocate, helping you understand the potential root causes of your symptoms and guiding you toward a more balanced, vibrant, and joyful life.</p>
-            <div className="coaching-appt">
-                <ButtonLink to= "https://bookme.name/kmlwellness">Schedule a free 30 minute consulatation</ButtonLink>
-            </div>
-        <div className="services">
-        <h2>Packages</h2>
-        <div className="class-list">
-            {classes.map((cls, index) => (
-                <div key={index} className="class-box">
-                    <img src={cls.image} alt={cls.title} className="class-image" />
-                    <div className="class-description">
-                        <h2>{cls.title}</h2>
-                        <p>{cls.description}</p>
-                        {showInfo &&  <div>Show Page</div>}
-
-                        <div onClick = {showInfoPage} className="desc-button">More Info</div>
-                        <Dialog open={showInfo}
-                        PaperProps={{
-                            style: {
-                                backgroundColor: 'transparent',
-                                boxShadow: 'none'
-                            },
-                        }}>
-                            {/* <p>{cls.moreInfo.listTitle}</p>
-                            <ul>
-                                {cls.moreInfo.list.map((item, index) =>
-                            <li>{item}</li>
-                            )}
-                            </ul>
-                            <p>Price: {cls.moreInfo.price}</p> */}
-                            <div className ="dialog-box">
-                            <CoachingInfo/>
-                            <div onClick = {showInfoPage} className="dismiss-button">Close
-                            </div>
-                            </div>
-
-                        </Dialog>
+            <div className="home-grid-container">
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="/lets-talk/1.png" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Discovery Call</h3>
+                        <p>
+                            If you’re feeling overwhelmed by all the expert advise and not sure how to start relieving your symptoms let’s talk. We’ll connect over a free 30-minute Discovery Session to determine how a personalized coaching approach can help you cut through the noise, find the solutions that resonate with you and start working toward your goals.
+                        </p>
+                        <div className="button-wrapper">
+                            <button onClick={() => {
+                                const recipient = 'kathleen.meehanlorenzo@gmail.com';
+                                const subject = 'Inquiry about Discovery Call';
+                                window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}`;
+                            }} className="cta-button">Book Now</button>
+                        </div>
                     </div>
                 </div>
-            ))}
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="/lets-talk/2.png" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Thriving or Surviving: Your Midlife Wellness Check-in</h3>
+                        <p>
+                            A longer discovery session where we spend 90 minutes building a road map for your Menopause Journey. Together we’ll explore your health history, the symptoms you’re experiencing (and those you didn’t know could be menopause-related) and your treatment options. We’ll prioritize your symptoms and create goals to reduce or relieve them. <br />*Required to establish our coaching relationship and lays a foundation for our work together. Credit given if you sign up for a personalized menopause offer.
+                        </p>
+                        <div className="button-wrapper">
+                            <button onClick={() => {
+                                const recipient = 'kathleen.meehanlorenzo@gmail.com';
+                                const subject = 'Inquiry about Thriving or Surviving';
+                                window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}`;
+                            }} className="cta-button">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="/lets-talk/3.png" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Personalized Menopause Reset</h3>
+                        <p>
+                            Building on the work we started in the Midlife Wellness Check-in, you’ll choose a particular symptom that’s causing you the most difficulty. We’ll discuss lifestyle changes and treatment options. Together we’ll put together a plan with specific, achievable goals. At the end of the six weeks we’ll celebrate your successes and make a plan to maintain the changes you’ve made.
+                        </p>
+                    </div>
+                </div>
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="/lets-talk/4.png" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Personalized Menopause Deep Dive</h3>
+                        <p>
+                        Over the course of 3 months we’ll take a deeper dive into exploring your menopause symptoms and your options for relieving them. We’ll explore the other aspects of your health that predict a vibrant future. We’ll discuss how sustainable lifestyle changes in the areas of nutrition, movement, stress reduction, sleep, etc can affect the next chapter of your life. And contribute to keeping you empowered, confident and vibrant for the rest of your life.                        </p>
+                    </div>
+                </div>
+                <div className="grid-item">
+                    <div className="grid-image">
+                        <img src="/lets-talk/5.png" alt="Placeholder" />
+                    </div>
+                    <div className="grid-text">
+                        <h3>Menopause Support Group: From Surviving Alone to Thriving Together</h3>
+                        <p>
+                            An opportunity to experience coaching in a group setting. You are invited to share your experiences and the solutions that have worked 
+                            for you as well as learn the same from other group members. 
+                            For many of us Menopause was never discussed, but just something you “got through”. 
+                            For others there may have been nobody to ask in the first place. Let’s create the community we wish we had.   
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-        </div>
-    </div>
     );
 }
 
