@@ -5,9 +5,9 @@ function About() {
     return (
         <div className="about">
             <h1>My Story - I’ve Been There, Too</h1>
-            <p>Through my forties and early fifties I considered myself to be a relatively healthy, fit individual. I exercised, ran and practiced yoga regularEnter ly and I slept well. With the exception of semi-annual PCP and GYN visits, I rarely found myself in need of a doctor.</p>
-            <p>Enter Perimenopause!</p>
-            <p><ul>
+            <p>Through my forties and early fifties I considered myself to be a relatively healthy, fit individual. I exercised, ran and practiced yoga regularly and I slept well. With the exception of semi-annual PCP and GYN visits, I rarely found myself in need of a doctor.</p>
+            <h2>Enter Perimenopause!</h2>
+            <ul>
             <li>An osteopenia diagnosis, followed in short order by osteoporosis made me feel old and frail despite my active lifestyle.</li>
             <li>Hot flashes that felt like I was roasting from the inside out.</li>
             <li>Night sweats that left me fumbling in the dark to change my PJs and find a dry place to sleep without waking my husband.</li>
